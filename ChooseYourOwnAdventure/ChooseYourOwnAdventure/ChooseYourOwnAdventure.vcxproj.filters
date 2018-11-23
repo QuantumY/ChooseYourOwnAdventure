@@ -21,12 +21,15 @@
     <ClCompile Include="src\choice.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\stdh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\choice.h">
+    <ClInclude Include="src\stdh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\stdh.h">
+    <ClInclude Include="src\choice.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

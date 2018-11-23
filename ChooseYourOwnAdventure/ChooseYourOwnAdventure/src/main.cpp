@@ -2,19 +2,21 @@
 #include "choice.h"
 
 int main()
-{
-	std::cout << "Hello Testing!!" << std::endl;
-	std::cin.ignore();
-
-
+{	
 	choice a;
 	choice b;
 	choice c;
+
+	b.title = "hello from b!";
+	c.title = "hello from c!";
+
+	b.id = 'a';
+	c.id = 'b';
 
 	a.addChoice(&b);
 	a.addChoice(&c);
 
 	a.prompt();
-	
+
 	return 0;
 }
