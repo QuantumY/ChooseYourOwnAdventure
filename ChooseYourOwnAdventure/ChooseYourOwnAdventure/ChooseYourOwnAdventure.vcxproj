@@ -118,6 +118,7 @@
   <ItemGroup>
     <ClCompile Include="src\choice.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\stdh.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\choice.h" />
