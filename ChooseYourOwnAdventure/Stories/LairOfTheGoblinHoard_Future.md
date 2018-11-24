@@ -109,6 +109,27 @@ After examining and taking an item from the chest, ( if you had the key), you re
 
 ### you must fight.
 ####Jester’s fight.
+
+#Jester’s fight.
+
+##
+Jester encountered you?
+[ Armor Class 2, Hit points 12, Pole arm.]
+
+You: 
+[ Armor Class 7, Hit Points 9 (I’m assuming), War Hammer or Magic Dagger.]
+
+View Battle checklist for more info
+
+Jester has initiative and goes first. 
+
+### If you beat Jester:
+#### Jester’s room
+### If Jester beat you:
+#### Drop everything you collected, and return to: The Lair of the Goblin Hoard
+
+
+
 #Jester’s chest
 
 ## 
