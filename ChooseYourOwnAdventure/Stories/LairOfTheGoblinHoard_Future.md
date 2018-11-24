@@ -109,6 +109,27 @@ After examining and taking an item from the chest, ( if you had the key), you re
 
 ### you must fight.
 ####Jester’s fight.
+
+#Jester’s fight.
+
+##
+Jester encountered you?
+[ Armor Class 2, Hit points 12, Pole arm.]
+
+You: 
+[ Armor Class 7, Hit Points 9 (I’m assuming), War Hammer or Magic Dagger.]
+
+View Battle checklist for more info
+
+Jester has initiative and goes first. 
+
+### If you beat Jester:
+#### Jester’s room
+### If Jester beat you:
+#### Drop everything you collected, and return to: The Lair of the Goblin Hoard
+
+
+
 #Jester’s chest
 
 ## 
@@ -116,3 +137,11 @@ You put the key in the chest and turn it. The chest clicks open and inside you f
 [ You obtained the Magic dagger. It adds one to your damage!]. 
 
 #### Go back to: Jester’s room, and finish reading the passage.
+
+#Conference room
+
+##
+You open the large, wooden door and find yourself in a big room with a long table in the middle. Sitting at the table there are goblins speaking in a language you cannot understand. A goblin turns around and notices you, and informs the rest. 
+
+### You must fight. 
+#### Goblins showdown

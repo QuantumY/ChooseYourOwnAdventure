@@ -1,4 +1,6 @@
-import choice
+#!/usr/bin/python
+
+from choice import choice
 
 a = choice()
 b = choice()
