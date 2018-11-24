@@ -1,2 +1,6 @@
-﻿  main.cpp
-  ChooseYourOwnAdventure.vcxproj -> C:\Users\Ethan\Desktop\ChooseYourOwnAdventure\x64\Debug\ChooseYourOwnAdventure.exe
+﻿  choice.cpp
+  main.cpp
+  stdh.cpp
+  Generating Code...
+c:\users\ethan\documents\github\chooseyourownadventure\chooseyourownadventure\chooseyourownadventure\src\choice.cpp(26): warning C4715: 'choice::prompt': not all control paths return a value
+  ChooseYourOwnAdventure.vcxproj -> C:\Users\Ethan\Documents\GitHub\ChooseYourOwnAdventure\ChooseYourOwnAdventure\x64\Debug\ChooseYourOwnAdventure.exe

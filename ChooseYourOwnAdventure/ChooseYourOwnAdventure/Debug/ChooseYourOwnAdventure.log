@@ -1,0 +1,4 @@
+﻿  choice.cpp
+c:\users\ethan\documents\github\chooseyourownadventure\chooseyourownadventure\chooseyourownadventure\src\choice.cpp(12): warning C4018: '<': signed/unsigned mismatch
+c:\users\ethan\documents\github\chooseyourownadventure\chooseyourownadventure\chooseyourownadventure\src\choice.cpp(21): warning C4018: '<': signed/unsigned mismatch
+  ChooseYourOwnAdventure.vcxproj -> C:\Users\Ethan\Documents\GitHub\ChooseYourOwnAdventure\ChooseYourOwnAdventure\Debug\ChooseYourOwnAdventure.exe

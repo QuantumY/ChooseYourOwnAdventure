@@ -5,7 +5,7 @@
 class choice
 { 
 public:
-	char id;
+	std::string id;		//choice id
 	std::string title;	//choice title
 	std::string text;	//choice text
 	std::vector<choice*> choices;
@@ -13,6 +13,7 @@ public:
 	choice();
 	choice* prompt();
 	void addChoice(choice*);
+	virtual void action();
 	~choice();
 
 private:

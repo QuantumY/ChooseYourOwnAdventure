@@ -10,13 +10,20 @@ int main()
 	b.title = "hello from b!";
 	c.title = "hello from c!";
 
-	b.id = 'a';
-	c.id = 'b';
+	b.id = "a.b";
+	c.id = "a.c";
 
 	a.addChoice(&b);
 	a.addChoice(&c);
 
-	a.prompt();
+	choice* next_choice;
+
+	next_choice = a.prompt();
+
+	while (true)
+	{
+		next_choice = next_choice->prompt();
+	}
 
 	return 0;
 }
