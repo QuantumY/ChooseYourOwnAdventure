@@ -1,13 +1,44 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
+import choice
 
-import story_parser
+a = choice()
+b = choice()
+c = choice( )
 
-def main():
-    """ Main program """
-    # Code goes over here.
-    print "What's Up"
-    return 0
+ba = choice()
+bb = choice()
 
-if __name__ == "__main__":
-    main()
+ca = choice()
+cb = choice()
+
+ba.title = "START->a->a"
+bb.title = "START->a->b"
+
+ca.title = "START->b->a"
+cb.title = "START->b->b"
+b.title = "hello from b!"
+c.title = "hello from c!"
+
+ba.id = 'a';
+bb.id = 'b';
+
+ca.id = 'a'
+cb.id = 'b'
+
+b.id = 'a'
+c.id = 'b'
+
+b.addChoice(ba)
+b.addChoice(bb)
+
+c.addChoice(ca)
+c.addChoice(cb)
+
+a.addChoice(b)
+a.addChoice(c)
+
+next_choice = choice()
+
+next_choice = a.prompt()
+
+while (true):
+	next_choice = next_choice.prompt()
