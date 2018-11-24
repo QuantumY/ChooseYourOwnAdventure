@@ -145,3 +145,21 @@ You open the large, wooden door and find yourself in a big room with a long tabl
 
 ### You must fight. 
 #### Goblins showdown
+
+#Goblins showdown
+
+##
+You encountered 5 goblins!
+Each one: [ Armor Class 18, Hit points 3, iron dagger.]
+
+You: 
+[ Armor Class 7, Hit points 9 (I’m assuming), War Hammer or Magic dagger or Jester’s crossbow.]
+
+View battle checklist for more info.
+
+You have initiative and go first.
+
+### If you beat the goblins:
+#### Goblins showdown, prize
+### If the goblins beat you: 
+#### Drop anything you may have collected and return to: The Lair of the Goblin Hoard.

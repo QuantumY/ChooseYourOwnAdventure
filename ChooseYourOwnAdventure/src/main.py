@@ -1,6 +1,9 @@
 #!/usr/bin/python
 
-from choice import choice
+from choice import *
+from story_parser import story_parser
+
+story_parser("../Stories/LairOfTheGoblinHoard.md")
 
 a = choice()
 b = choice()
