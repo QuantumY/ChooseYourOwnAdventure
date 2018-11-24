@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import story_parser
+
 def main():
     """ Main program """
     # Code goes over here.
