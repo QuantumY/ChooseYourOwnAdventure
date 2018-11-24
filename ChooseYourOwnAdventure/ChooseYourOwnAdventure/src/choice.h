@@ -1,4 +1,5 @@
-#pragma once
+#ifndef CYOA_CHOICE_H
+#define CYOA_CHOICE_H
 
 #include "stdh.h"
 
@@ -17,3 +18,5 @@ public:
 
 private:
 };
+
+#endif

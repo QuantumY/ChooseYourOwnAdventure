@@ -1,13 +1,12 @@
 #pragma once
 
 #include "choice.h"
-#include "stdh.h"
 
 choice::choice(){}
 
 choice* choice::prompt()
 {
-	for (int i = 0; i < choices.size(); i++)
+	for (unsigned int i = 0; i < choices.size(); i++)
 	{
 		std::cout << id;
 		std::cout << ") ";
@@ -16,9 +15,9 @@ choice* choice::prompt()
 
 	std::string inpvar;	//input variable
 	std::cin >> inpvar;
-	for (int i2 = 0; i2 < choices.size(); i2++)
+	for (unsigned int i2 = 0; i2 < choices.size(); i2++)
 	{
-		if (choices[i2]->id == (removews(inpvar))[0])
+		if (choices[i2]->id == (trim(inpvar))[0])
 		{
 			return(choices[i2]);
 		}

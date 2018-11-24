@@ -1,2 +1,4 @@
 ﻿  main.cpp
-  ChooseYourOwnAdventure.vcxproj -> C:\Users\Ethan\Documents\GitHub\ChooseYourOwnAdventure\ChooseYourOwnAdventure\Debug\ChooseYourOwnAdventure.exe
+main.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > __cdecl trim(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?trim@@YA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V12@@Z) already defined in choice.obj
+stdh.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > __cdecl trim(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?trim@@YA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V12@@Z) already defined in choice.obj
+C:\Users\Ethan\Documents\GitHub\ChooseYourOwnAdventure\ChooseYourOwnAdventure\Debug\ChooseYourOwnAdventure.exe : fatal error LNK1169: one or more multiply defined symbols found

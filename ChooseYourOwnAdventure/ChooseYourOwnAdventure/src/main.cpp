@@ -1,4 +1,3 @@
-#include "stdh.h"
 #include "choice.h"
 
 int main()
@@ -22,8 +21,14 @@ int main()
 	b.title = "hello from b!";
 	c.title = "hello from c!";
 
-	b.id = "a.b";
-	c.id = "a.c";
+	ba.id = 'a';
+	bb.id = 'b';
+
+	ca.id = 'a';
+	cb.id = 'b';
+
+	b.id = 'a';
+	c.id = 'b';
 
 	b.addChoice(&ba);
 	b.addChoice(&bb);
