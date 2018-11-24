@@ -70,3 +70,11 @@ You put the key in the chest and turn it. The chest clicks open and inside you f
 [ You obtained the Magic dagger. It adds one to your damage!]. 
 
 #### Go back to: Jester’s room, and finish reading the passage.
+
+#Conference room
+
+##
+You open the large, wooden door and find yourself in a big room with a long table in the middle. Sitting at the table there are goblins speaking in a language you cannot understand. A goblin turns around and notices you, and informs the rest. 
+
+### You must fight. 
+#### Goblins showdown

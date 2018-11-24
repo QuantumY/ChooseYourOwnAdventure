@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-import choice
+from choice import choice
 
 a = choice()
 b = choice()
