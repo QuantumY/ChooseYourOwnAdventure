@@ -7,11 +7,9 @@ choice::choice(){}
 
 choice* choice::prompt()
 {
-	action();
-
 	for (int i = 0; i < choices.size(); i++)
 	{
-		std::cout << ' ' << id;
+		std::cout << id;
 		std::cout << ") ";
 		std::cout << choices[i]->title << std::endl;	//print the title (what the option does)
 	}
@@ -20,7 +18,7 @@ choice* choice::prompt()
 	std::cin >> inpvar;
 	for (int i2 = 0; i2 < choices.size(); i2++)
 	{
-		if (choices[i2]->id == removews(inpvar))
+		if (choices[i2]->id == (removews(inpvar))[0])
 		{
 			return(choices[i2]);
 		}
@@ -32,7 +30,5 @@ void choice::addChoice(choice* nc)	//new choice
 {
 	choices.push_back(nc);
 }
-
-void choice::action(){}
 
 choice::~choice(){}
