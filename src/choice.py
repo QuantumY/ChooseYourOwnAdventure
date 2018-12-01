@@ -38,6 +38,5 @@ class choice:
 			pyout(choiceX.title)
 			pyout(endl)
 
-		inpvar = None
-		pyin(inpvar)
+		inpvar = pyget()
 		return self.choices[inpvar.strip()[0]] #Bug
