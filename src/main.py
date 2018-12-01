@@ -5,7 +5,7 @@ storyParser = story_parser()
 
 theStory = storyParser.parseStoryFile("../Stories/LairOfTheGoblinHoard_test.md")
 
-#theStory.echo()
+theStory.echo()
 
-while True:
-	next_choice = next_choice.prompt()
+#while True:
+#	next_choice = next_choice.prompt()
