@@ -1,11 +1,18 @@
-import pyio
+from pyio import *
 
 class choice:
-	def setId(self, newval):
-		self.id = newval
+
+	def __init__(self):
+		self.title = None
+		self.text = None
+		self.choices = []
+		# Add self.choices vector
 
 	def setTitle(self, newval):
 		self.title = newval
+
+	def getTitle(self):
+		return self.title
 	
 	def setText(self, newval):
 		self.text = newval
@@ -15,18 +22,22 @@ class choice:
 	def addChoice(self, the_choice):
 		self.choices.append(the_choice)
 
+	def echo(self):
+		print "-------------------"
+		print self.title
+		print self.text
+		print "-------------------"
+
+		for choiceY in self.choices:
+			choiceY.echo()
+
 	def prompt(self):
-                self.choices = []
 
 		for choiceX in self.choices:
-			pyout(self.id)
 			pyout(") ")
 			pyout(choiceX.title)
 			pyout(endl)
 
-		inpvar;	#input variable
+		inpvar = None
 		pyin(inpvar)
-		for choiceY in self.choices:
-			if choiceY.id == inpvar.strip()[0]:
-				return choiceY
-		return self
+		return self.choices[inpvar.strip()[0]] #Bug

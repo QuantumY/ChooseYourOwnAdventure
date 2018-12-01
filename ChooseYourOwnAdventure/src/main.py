@@ -1,46 +1,16 @@
 #!/usr/bin/python
 
 from choice import choice
+from story_parser import story_parser
 
-a = choice()
-b = choice()
-c = choice( )
+storyParser = story_parser()
 
-ba = choice()
-bb = choice()
+theStory = storyParser.parseStoryFile("../Stories/LairOfTheGoblinHoard_test.md")
 
-ca = choice()
-cb = choice()
+# Test the parsing
+theStory.echo()
 
-ba.title = "START->a->a"
-bb.title = "START->a->b"
+next_choice = theStory.prompt()
 
-ca.title = "START->b->a"
-cb.title = "START->b->b"
-b.title = "hello from b!"
-c.title = "hello from c!"
-
-ba.id = 'a';
-bb.id = 'b';
-
-ca.id = 'a'
-cb.id = 'b'
-
-b.id = 'a'
-c.id = 'b'
-
-b.addChoice(ba)
-b.addChoice(bb)
-
-c.addChoice(ca)
-c.addChoice(cb)
-
-a.addChoice(b)
-a.addChoice(c)
-
-next_choice = choice()
-
-next_choice = a.prompt()
-
-while (true):
+while True:
 	next_choice = next_choice.prompt()
