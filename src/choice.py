@@ -13,7 +13,7 @@ class choice:
 
 	def getTitle(self):
 		return self.title
-	
+
 	def setText(self, newval):
 		self.text = newval
 
@@ -23,10 +23,10 @@ class choice:
 		self.choices.append(the_choice)
 
 	def echo(self):
-		print "-------------------"
-		print self.title
-		print self.text
-		print "-------------------"
+		pyout("-------------------\n")
+		pyout(self.title + '\n')
+		pyout(self.text + '\n')
+		pyout("-------------------\n")
 
 		for choiceY in self.choices:
 			choiceY.echo()

@@ -65,7 +65,8 @@ class story_parser:
                     sys.exit()
             elif currSeek == self.IS_NEXT_CHOICE and self.lineType(line) == self.IS_NEXT_CHOICE:
                 childChoice = choice()
-                childChoice.setTitle(line.split(self.IS_NEXT_CHOICE,1)[1].strip())
+                childChoice.setTitle(line.split(self.IS_NEXT_CHOICE, 1)[1].strip())
+                currSeek = self.IS_NEXT_CHOICE_LINK
             elif currSeek == self.IS_NEXT_CHOICE_LINK and self.lineType(line) == self.IS_NEXT_CHOICE_LINK:
                 thisPos = self.sFile.tell()
                 childChoice = self.seekAndProcessNewChoice(thisPos,childChoice)
@@ -95,4 +96,3 @@ class story_parser:
         self.sFile.close()
 
         return self.storyGraphEntry
-

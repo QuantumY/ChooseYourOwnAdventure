@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 from choice import choice
 from story_parser import story_parser
 
