@@ -32,11 +32,13 @@ class choice:
 			choiceY.echo()
 
 	def prompt(self):
-
+		cc = 0	#current choice
 		for choiceX in self.choices:
+			cc += 1
+			pyout(cc)
 			pyout(") ")
 			pyout(choiceX.title)
 			pyout(endl)
 
 		inpvar = pyget()
-		return self.choices[inpvar.strip()[0]] #Bug
+		return self.choices[int(inpvar.strip())-1] #Bug

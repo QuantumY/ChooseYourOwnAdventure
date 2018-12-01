@@ -7,9 +7,9 @@ class story_paser:
         self.IS_CHOICE_DESC = "##"
         self.IS_NEXT_CHOICE = "###"
         self.IS_NEXT_CHOICE_LINK = "####"
-        self.story_path = sFile
-        self.story = None
-        self.counter = None #story counter (charcter in story)
+        self.sf = open(sFile, "r")
+        self.story = self.sf.read()
+        self.counter = 0    #story counter (charcter in story)
 
     def detectLineType(self):
         endDetect = False
@@ -32,17 +32,24 @@ class story_paser:
         return out
 
     def getChoice(self, pChoice):   #parent choice
-        out = choice()
+        cc = choice()   #current choice to work on
+        nc = []         # next choice (array names)
         while self.counter < len(self.story):
             if detectLineType() == self.IS_CHOICE:
-                out.title = getData()
-                if (detectLineType() == self.IS_CHOICE_DESC):
-                    out.text = getData()
+                cc.title = getData()
+                if detectLineType() == self.IS_CHOICE_DESC:
+                    cc.text = getData()
+                elif detectLineType() == self.IS_NEXT_CHOICE:
+                    nc.append(getData())
+                elif detectLineType() == self.IS_NEXT_CHOICE_LINK:
+                    nc.append(getData())
+                else:
+                    pChoice.addChoice(cc)
+                    break
+            else:
+                break
+        return nc
 
     def parseStory(self):
-        self.story = open(story_path, "r")
-        self.story = self.story.read()
-        self.counter = 0
         while True:
-            c = self.story[self.counter]
             getChoice()
