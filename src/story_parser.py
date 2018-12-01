@@ -16,21 +16,17 @@ class story_parser:
         self.parentChoice = None
         self.choiceDict = None
 
+
     def lineType(self, line):
         if line.find(self.IS_NEXT_CHOICE_LINK) != -1:
-            print "Found a choice link"
             return self.IS_NEXT_CHOICE_LINK
         elif line.find(self.IS_NEXT_CHOICE) != -1:
-            print "Found a next choice"
             return self.IS_NEXT_CHOICE
         elif line.find(self.IS_CHOICE_DESC) != -1:
-            print "Found a choice description"
             return self.IS_CHOICE_DESC
         elif line.find(self.IS_CHOICE) != -1:
-            print "Found a choice"
             return self.IS_CHOICE
         else:
-            print "Found something else"
             return self.IS_NOT_CHOICE_FIELD
 
 
@@ -83,6 +79,7 @@ class story_parser:
                 return childChoice
 
         return None
+
 
     #### Parse A Story File
     # Returns a choice object that is the top level of the story
