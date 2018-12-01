@@ -14,7 +14,8 @@ class story_parser:
         self.storyGraphEntry = None
         self.pos = 0
         self.parentChoice = None
-        self.choiceDict = None
+        self.firstChoiceName = None
+        self.choiceDict = {}
 
 
     def lineType(self, line):
@@ -29,58 +30,88 @@ class story_parser:
         else:
             return self.IS_NOT_CHOICE_FIELD
 
+    def addToDict(self, thisTitle):
+        if thisTitle == None:
+            print "ERROR: No Choice title text"
+            sys.exit()
+        if thisTitle not in self.choiceDict:
+            self.choiceDict[thisTitle] = choice()
+            self.choiceDict[thisTitle].setTitle(thisTitle)
+            #print "Adding new " + thisTitle + " to dict"
+            if self.firstChoiceName == None:
+                self.firstChoiceName = thisTitle
+                self.storyGraphEntry = self.choiceDict[thisTitle]
 
-    def readChoiceDescription(self):
-        choiceText = ""
 
-        for line in self.sFile:
-            if self.lineType(line) == self.IS_NOT_CHOICE_FIELD:
-                choiceText = choiceText + line
-            else:
-                break
-        return choiceText
-
-
-    def seekAndProcessNewChoice(self, startPos, parentChoice):
-        self.sFile.seek(startPos)
-        childChoice = None
-        currSeek = self.IS_CHOICE
-        choiceText = None
+    def createAllChoices(self):
 
         for line in self.sFile:
-            line.strip()
-            if currSeek == self.IS_CHOICE and self.lineType(line) == self.IS_CHOICE:
-                if parentChoice.getTitle() == None:
-                    parentChoice.setTitle(line.split(self.IS_CHOICE, 1)[1].strip())
-                    currSeek = self.IS_CHOICE_DESC
-                elif parentChoice.getTitle() == line.split(self.IS_CHOICE, 1)[1].strip():
-                    currSeek = self.IS_CHOICE_DESC
-            elif currSeek == self.IS_CHOICE_DESC and self.lineType(line) == self.IS_CHOICE_DESC:
-                choiceText = self.readChoiceDescription()
-                if choiceText != None:
-                    parentChoice.setText(choiceText)
-                    currSeek = self.IS_NEXT_CHOICE
-                else:
-                    print "ERROR: No Choice description found"
+            if self.lineType(line) == self.IS_CHOICE:
+                thisTitle = line.split(self.IS_CHOICE, 1)[1].strip()
+                self.addToDict(thisTitle)
+            if self.lineType(line) == self.IS_NEXT_CHOICE_LINK:
+                thisTitle = line.split(self.IS_NEXT_CHOICE_LINK, 1)[1].strip()
+                self.addToDict(thisTitle)
+
+
+    def getAllChoiceDescriptions(self):
+        self.sFile.seek(0)
+        thisTitle = None
+        description = None
+
+        for line in self.sFile:
+            if self.lineType(line) == self.IS_CHOICE:
+                if description != None:
+                    self.choiceDict[thisTitle].setText(description)
+                    #print thisTitle + "'s description: " + self.choiceDict[thisTitle].getText()
+                    description = None
+                    thisTitle = None
+                thisTitle = line.split(self.IS_CHOICE, 1)[1].strip()
+                #print "Looking for " + thisTitle + "'s description"
+            elif self.lineType(line) == self.IS_CHOICE_DESC:
+                if thisTitle == None:
+                    print "Descption without Title"
                     sys.exit()
-            elif currSeek == self.IS_NEXT_CHOICE and self.lineType(line) == self.IS_NEXT_CHOICE:
-                childChoice = choice()
-                childChoice.setTitle(line.split(self.IS_NEXT_CHOICE, 1)[1].strip())
-                currSeek = self.IS_NEXT_CHOICE_LINK
-            elif currSeek == self.IS_NEXT_CHOICE_LINK and self.lineType(line) == self.IS_NEXT_CHOICE_LINK:
-                thisPos = self.sFile.tell()
-                childChoice = self.seekAndProcessNewChoice(thisPos,childChoice)
-                self.sFile.seek(thisPos)
-                if childChoice == None:
-                    print "Done with child choices"
-                else:
-                    parentChoice.addChoice(childChoice)
-            elif currSeek == self.IS_NEXT_CHOICE and self.lineType(line) == self.IS_CHOICE:
-                childChoice.echo()
-                return childChoice
+                description = line.split(self.IS_CHOICE_DESC, 1)[1].strip()
+                #print thisTitle + "'s description started"
+                if description == None:
+                    description = " "
+            elif self.lineType(line) == self.IS_NOT_CHOICE_FIELD and description != None:
+                description = description + line.strip()
+            elif self.lineType(line) == self.IS_NEXT_CHOICE_LINK and description == None and thisTitle != None:
+                #print "ERROR: No Choice description found"
+                sys.exit()
 
-        return None
+        # EOF before next tag
+        if description != None:
+            self.choiceDict[thisTitle].setText(description)
+            #print thisTitle + "'s description: " + self.choiceDict[thisTitle].getText()
 
+
+    def linkChildren(self):
+        self.sFile.seek(0)
+        thisTitle = None
+        nextChoiceText =  None
+
+        for line in self.sFile:
+            if self.lineType(line) == self.IS_CHOICE:
+                thisTitle = line.split(self.IS_CHOICE, 1)[1].strip()
+            elif self.lineType(line) == self.IS_NEXT_CHOICE:
+                nextChoiceText = line.split(self.IS_NEXT_CHOICE, 1)[1].strip()
+            elif self.lineType(line) == self.IS_NEXT_CHOICE_LINK:
+                #if self.storyGraphEntry.getTitle() == thisTitle:
+                #    newChoice = choice()
+                #    newChoice.setTitle(thisTitle)
+                #    newChoice.setText(self.choiceDict[thisTitle].getText())
+                #    self.storyGraphEntry.addChoice()
+                #else:
+                #print "Adding " + line.split(self.IS_NEXT_CHOICE_LINK, 1)[1].strip() + " as child of " + thisTitle
+                self.choiceDict[thisTitle].addChoice(self.choiceDict[line.split(self.IS_NEXT_CHOICE_LINK, 1)[1].strip()])
+
+    def printDict(self):
+        for k,v in self.choiceDict.items():
+            #print " >>>> " + k
+            print v.echo()
 
     #### Parse A Story File
     # Returns a choice object that is the top level of the story
@@ -89,9 +120,11 @@ class story_parser:
         # Open file, assume Markdown format
         self.sFile = open(pathToStoryFile, "r")
 
-        self.storyGraphEntry = choice()
+        self.createAllChoices()
+        self.getAllChoiceDescriptions()
+        self.linkChildren()
 
-        self.seekAndProcessNewChoice(0,self.storyGraphEntry)
+        #self.printDict()
 
         self.sFile.close()
 
