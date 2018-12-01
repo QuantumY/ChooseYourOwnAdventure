@@ -14,7 +14,7 @@ class choice:
 
 	def getTitle(self):
 		return self.title
-	
+
 	def setText(self, newval):
 		self.text = newval
 
@@ -41,12 +41,13 @@ class choice:
 			choice.echo(n)
 
 	def prompt(self):
-
+		cc = 0	#current choice
 		for choiceX in self.choices:
+			cc += 1
+			pyout(cc)
 			pyout(") ")
 			pyout(choiceX.title)
 			pyout(endl)
 
-		inpvar = None
-		pyin(inpvar)
-		return self.choices[inpvar.strip()[0]] #Bug
+		inpvar = pyget()
+		return self.choices[int(inpvar.strip())-1] #Bug

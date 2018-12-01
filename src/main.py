@@ -1,4 +1,3 @@
-
 from choice import choice
 from story_parser import story_parser
 

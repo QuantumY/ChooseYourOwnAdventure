@@ -113,7 +113,6 @@ class story_parser:
             #print " >>>> " + k
             print v.echo()
 
-
     #### Parse A Story File
     # Returns a choice object that is the top level of the story
 
@@ -130,4 +129,3 @@ class story_parser:
         self.sFile.close()
 
         return self.storyGraphEntry
-
