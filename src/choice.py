@@ -41,33 +41,30 @@ class choice:
 			choice.echo(n)
 
 	def collectUserInput(self):
-		usersChoice = input("Please Choose: ")
-
+                pyout("Please Choose: ")
+		usersChoice = pyget()
 		return int(usersChoice)
-
 
 	def prompt(self):
 		pyout(self.getTitle())
-		pyout("\n")
 		pyout(self.getText())
-		pyout("\n")
 		pyout("\n")
 
 		cc = 1
 		for choice in self.choices:
-			pyout(str(cc)+" : "+choice.getTitle()+"\n")
+			pyout(str(cc)+" : "+choice.getTitle())
 			cc = cc + 1
 
-		pyout(str(cc)+" : Quit\n")
+		pyout(str(cc)+" : Quit")
 
-		usersChoice = 0
+		ucc = 0 #user choice counter
 
-		while usersChoice <= 0 or usersChoice > cc:
-			usersChoice = self.collectUserInput()
+		while ucc <= 0 or (ucc > cc):
+                        ucc = self.collectUserInput()
 
-		if usersChoice == cc:
-			pyout("\nBye!\n")
+		if ucc == cc:
+			pyout("\nBye!")
 		else:
-			self.choices[usersChoice].prompt()
+                        self.choices[ucc-1].prompt()
 		
 

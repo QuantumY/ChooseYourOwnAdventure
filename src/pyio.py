@@ -1,7 +1,5 @@
-import sys as sys
-
-def pyout(mystring):
-	sys.stdout.write(mystring)
+def pyout(myString):
+	print myString
 
 def pyin(mysave, prompt):
 	mysave = input(prompt)
