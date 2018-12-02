@@ -40,14 +40,34 @@ class choice:
 		for choice in self.choices:
 			choice.echo(n)
 
-	def prompt(self):
-		cc = 0	#current choice
-		for choiceX in self.choices:
-			cc += 1
-			pyout(cc)
-			pyout(") ")
-			pyout(choiceX.title)
-			pyout(endl)
+	def collectUserInput(self):
+		usersChoice = input("Please Choose: ")
 
-		inpvar = pyget()
-		return self.choices[int(inpvar.strip())-1] #Bug
+		return int(usersChoice)
+
+
+	def prompt(self):
+		pyout(self.getTitle())
+		pyout("\n")
+		pyout(self.getText())
+		pyout("\n")
+		pyout("\n")
+
+		cc = 1
+		for choice in self.choices:
+			pyout(str(cc)+" : "+choice.getTitle()+"\n")
+			cc = cc + 1
+
+		pyout(str(cc)+" : Quit\n")
+
+		usersChoice = 0
+
+		while usersChoice <= 0 or usersChoice > cc:
+			usersChoice = self.collectUserInput()
+
+		if usersChoice == cc:
+			pyout("\nBye!\n")
+		else:
+			self.choices[usersChoice].prompt()
+		
+
