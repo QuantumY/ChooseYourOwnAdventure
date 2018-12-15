@@ -1,21 +1,21 @@
 import re
 from choice import choice
+from scenario import scenario
 import sys as sys
 
 class story_parser:
 
     def __init__(self):
-        self.IS_CHOICE = "#"
-        self.IS_CHOICE_DESC = "##"
+        self.IS_SCENARIO = "#"
+        self.IS_SCENARIO_DESC = "##"
         self.IS_NEXT_CHOICE = "###"
         self.IS_NEXT_CHOICE_LINK = "####"
-        self.IS_NOT_CHOICE_FIELD = ""
+        self.IS_NOT_SCENARIO_FIELD = ""
         self.sFile = None
         self.storyGraphEntry = None
         self.pos = 0
-        self.parentChoice = None
         self.firstChoiceName = None
-        self.choiceDict = {}
+        self.scenarioDict = {}
 
 
     def lineType(self, line):
@@ -23,34 +23,39 @@ class story_parser:
             return self.IS_NEXT_CHOICE_LINK
         elif line.find(self.IS_NEXT_CHOICE) != -1:
             return self.IS_NEXT_CHOICE
-        elif line.find(self.IS_CHOICE_DESC) != -1:
-            return self.IS_CHOICE_DESC
-        elif line.find(self.IS_CHOICE) != -1:
-            return self.IS_CHOICE
+        elif line.find(self.IS_SCENARIO_DESC) != -1:
+            return self.IS_SCENARIO_DESC
+        elif line.find(self.IS_SCENARIO) != -1:
+            return self.IS_SCENARIO
         else:
-            return self.IS_NOT_CHOICE_FIELD
+            return self.IS_NOT_SCENARIO_FIELD
+
+
+    def checkKey(self, thisTitle):
+
+        return re.sub(r'[^\x00-\x7F]+',r'', thisTitle)
+
 
     def addToDict(self, thisTitle):
         if thisTitle == None:
-            print "ERROR: No Choice title text"
+            print "ERROR: No Scenario title text"
             sys.exit()
-        if thisTitle not in self.choiceDict:
-            self.choiceDict[thisTitle] = choice()
-            self.choiceDict[thisTitle].setTitle(thisTitle)
-            #print "Adding new " + thisTitle + " to dict"
+
+        dictKey = self.checkKey(thisTitle)
+
+        if dictKey not in self.scenarioDict:
+            self.scenarioDict[dictKey] = scenario()
+            self.scenarioDict[dictKey].setTitle(dictKey)
+            #print "Adding new " + dictKey + " to dict"
             if self.firstChoiceName == None:
-                self.firstChoiceName = thisTitle
-                self.storyGraphEntry = self.choiceDict[thisTitle]
+                self.firstChoiceName = dictKey
 
 
-    def createAllChoices(self):
+    def createAllScenarios(self):
 
         for line in self.sFile:
-            if self.lineType(line) == self.IS_CHOICE:
-                thisTitle = line.split(self.IS_CHOICE, 1)[1].strip()
-                self.addToDict(thisTitle)
-            if self.lineType(line) == self.IS_NEXT_CHOICE_LINK:
-                thisTitle = line.split(self.IS_NEXT_CHOICE_LINK, 1)[1].strip()
+            if self.lineType(line) == self.IS_SCENARIO:
+                thisTitle = line.split(self.IS_SCENARIO, 1)[1].strip()
                 self.addToDict(thisTitle)
 
 
@@ -60,58 +65,54 @@ class story_parser:
         description = None
 
         for line in self.sFile:
-            if self.lineType(line) == self.IS_CHOICE:
+            if self.lineType(line) == self.IS_SCENARIO:
                 if description != None:
-                    self.choiceDict[thisTitle].setText(description)
-                    #print thisTitle + "'s description: " + self.choiceDict[thisTitle].getText()
+                    self.scenarioDict[self.checkKey(thisTitle)].setDesc(description)
+                    #print thisTitle + "'s description: " + self.scenarioDict[self.checkKey(thisTitle)].getDesc()
                     description = None
                     thisTitle = None
-                thisTitle = line.split(self.IS_CHOICE, 1)[1].strip()
+                thisTitle = line.split(self.IS_SCENARIO, 1)[1].strip()
                 #print "Looking for " + thisTitle + "'s description"
-            elif self.lineType(line) == self.IS_CHOICE_DESC:
+            elif self.lineType(line) == self.IS_SCENARIO_DESC:
                 if thisTitle == None:
                     print "Descption without Title"
                     sys.exit()
-                description = line.split(self.IS_CHOICE_DESC, 1)[1].strip()
+                description = line.split(self.IS_SCENARIO_DESC, 1)[1]
                 #print thisTitle + "'s description started"
                 if description == None:
                     description = " "
-            elif self.lineType(line) == self.IS_NOT_CHOICE_FIELD and description != None:
-                description = description + line.strip()
+            elif self.lineType(line) == self.IS_NOT_SCENARIO_FIELD and description != None:
+                description = description + line
             elif self.lineType(line) == self.IS_NEXT_CHOICE_LINK and description == None and thisTitle != None:
                 #print "ERROR: No Choice description found"
                 sys.exit()
 
         # EOF before next tag
         if description != None:
-            self.choiceDict[thisTitle].setText(description)
-            #print thisTitle + "'s description: " + self.choiceDict[thisTitle].getText()
+            self.scenarioDict[self.checkKey(thisTitle)].setDesc(description)
+            #print thisTitle + "'s description: " + self.scenarioDict[self.checkKey(thisTitle)].getDesc()
 
 
-    def linkChildren(self):
+    def addChoices(self):
         self.sFile.seek(0)
         thisTitle = None
-        nextChoiceText =  None
+        currentChoice = None
 
         for line in self.sFile:
-            if self.lineType(line) == self.IS_CHOICE:
-                thisTitle = line.split(self.IS_CHOICE, 1)[1].strip()
+            if self.lineType(line) == self.IS_SCENARIO:
+                thisTitle = line.split(self.IS_SCENARIO, 1)[1].strip()
             elif self.lineType(line) == self.IS_NEXT_CHOICE:
-                nextChoiceText = line.split(self.IS_NEXT_CHOICE, 1)[1].strip()
+                currentChoice = choice()
+                currentChoice.setUserSelectText(line.split(self.IS_NEXT_CHOICE, 1)[1].strip())
             elif self.lineType(line) == self.IS_NEXT_CHOICE_LINK:
-                #if self.storyGraphEntry.getTitle() == thisTitle:
-                #    newChoice = choice()
-                #    newChoice.setTitle(thisTitle)
-                #    newChoice.setText(self.choiceDict[thisTitle].getText())
-                #    self.storyGraphEntry.addChoice()
-                #else:
-                #print "Adding " + line.split(self.IS_NEXT_CHOICE_LINK, 1)[1].strip() + " as child of " + thisTitle
-                self.choiceDict[thisTitle].addChoice(self.choiceDict[line.split(self.IS_NEXT_CHOICE_LINK, 1)[1].strip()])
+                currentChoice.setScenario(self.scenarioDict[self.checkKey(line.split(self.IS_NEXT_CHOICE_LINK, 1)[1].strip())])
+                print "Adding " + line.split(self.IS_NEXT_CHOICE_LINK, 1)[1].strip() + " as child of " + thisTitle + " with user select text: " + currentChoice.getUserSelectText()
+                self.scenarioDict[self.checkKey(thisTitle)].addChoice(currentChoice)
 
     def printDict(self):
-        for k,v in self.choiceDict.items():
+        for k,v in self.scenarioDict.items():
             #print " >>>> " + k
-            print v.echo()
+            print v.getTitle()
 
     #### Parse A Story File
     # Returns a choice object that is the top level of the story
@@ -120,12 +121,12 @@ class story_parser:
         # Open file, assume Markdown format
         self.sFile = open(pathToStoryFile, "r")
 
-        self.createAllChoices()
+        self.createAllScenarios()
         self.getAllChoiceDescriptions()
-        self.linkChildren()
+        self.addChoices()
 
         #self.printDict()
 
         self.sFile.close()
 
-        return self.storyGraphEntry
+        return self.scenarioDict[self.firstChoiceName]
