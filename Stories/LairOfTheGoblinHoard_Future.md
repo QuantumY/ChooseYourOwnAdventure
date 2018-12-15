@@ -21,7 +21,7 @@ You step into the mess hall. There are 4 rows of very long tables. Each table is
 
 
 
-#The Fountain Room.
+#The Fountain Room
 
 ##
 Inside this room is long, square lake. It seems to be man made. You see chests at each corner of the room. Each one has the same keyhole. There are three tunnels leading out of the room. The first tunnel is the one you just came from. There is a big door blocking the second tunnel. From it you here voices you don’t understand. From the third tunnel you see and hear nothing but and empty void. The door from the second tunnel opens, and a small runt of a goblin waddles out. He begins to head out through the first tunnel. But he turns around and notices you! 
