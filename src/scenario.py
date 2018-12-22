@@ -28,7 +28,7 @@ class scenario:
 
     def collectUserInput(self):
         pyout("Please Choose: ")
-        usersChoice = pyget() # Bug. Need to check for only numbers in user selection
+        usersChoice = pyget()
 
         ucInt = -1
 
