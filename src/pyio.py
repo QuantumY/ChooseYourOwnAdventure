@@ -2,9 +2,9 @@ def pyout(myString):
 	print myString
 
 def pyin(mysave, prompt):
-	mysave = input(prompt)
+	mysave = raw_input(prompt)
 
 def pyget():
-	return input("")
+	return raw_input("")
 
 endl = '\n'

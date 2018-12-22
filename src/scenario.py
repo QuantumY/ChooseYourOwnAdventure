@@ -1,12 +1,15 @@
 from pyio import *
 from choice import choice
+from time import sleep
 
 class scenario:
 
-    def __init__(self):
+    def __init__(self, characters=None, inventory=None):
         self.title = None
         self.desc = None
         self.choices = []
+        self.characters = characters
+        self.inventory = inventory
 
     def addChoice(self, the_choice):
         self.choices.append(the_choice)
@@ -26,7 +29,15 @@ class scenario:
     def collectUserInput(self):
         pyout("Please Choose: ")
         usersChoice = pyget() # Bug. Need to check for only numbers in user selection
-        return int(usersChoice)
+
+        ucInt = -1
+
+        try:
+            ucInt = int(usersChoice)
+        except:
+            ucInt = -1
+
+        return ucInt
 
     def echo(self, n = 0):
         print n
@@ -53,6 +64,8 @@ class scenario:
             pyout(str(cc)+" : "+aChoice.getUserSelectText())
             cc = cc + 1
 
+        pyout(str(cc)+" : Inventory")
+        cc = cc + 1
         pyout(str(cc)+" : Quit")
 
         ucc = 0 #user choice counter
@@ -60,7 +73,14 @@ class scenario:
         while ucc <= 0 or (ucc > cc):
             ucc = self.collectUserInput()
 
-        if ucc == cc:
+        if ucc == cc - 1:
+            if self.inventory == None:
+                print "Nothing else here."
+                sleep(2)
+                self.prompt()
+            else:
+                self.inventory.show()
+        elif ucc == cc:
             pyout("\nBye!")
         else:
             self.choices[ucc-1].prompt()
