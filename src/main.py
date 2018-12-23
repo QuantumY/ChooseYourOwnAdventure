@@ -1,8 +1,12 @@
 from scenario import scenario
 from story_parser import story_parser
+import sys
 
 storyParser = story_parser()
 
-theStory = storyParser.parseStoryFile("../Stories/LairOfTheGoblinHoard.md")
+if sys.argc < 2:
+	print "Only one argument is allowed: the story file!"
 
-theStory.prompt()
+else:
+	theStory = storyParser.parseStoryFile(sys.argv) #"../Stories/LairOfTheGoblinHoard.md"
+	theStory.prompt()
