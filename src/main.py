@@ -13,4 +13,3 @@ storyParser = story_parser()
 [theStory, thePlayer] = storyParser.parseStoryFile("../Stories/LairOfTheGoblinHoard.md")
 
 theStory.prompt(thePlayer)
-
