@@ -1,11 +1,15 @@
 import re
+import json
 from choice import choice
 from scenario import scenario
+from character import character
 import sys as sys
 
 class story_parser:
 
     def __init__(self):
+        self.IS_PLAYER_START = "{"
+        self.IS_PLAYER_END = "}"
         self.IS_SCENARIO = "#"
         self.IS_SCENARIO_DESC = "##"
         self.IS_NEXT_CHOICE = "###"
@@ -27,6 +31,10 @@ class story_parser:
             return self.IS_SCENARIO_DESC
         elif line.find(self.IS_SCENARIO) != -1:
             return self.IS_SCENARIO
+        elif line.find(self.IS_PLAYER_START) != -1:
+            return self.IS_PLAYER_START
+        elif line.find(self.IS_PLAYER_END) != -1:
+            return self.IS_PLAYER_END
         else:
             return self.IS_NOT_SCENARIO_FIELD
 
@@ -109,6 +117,28 @@ class story_parser:
                 print "Adding " + line.split(self.IS_NEXT_CHOICE_LINK, 1)[1].strip() + " as child of " + thisTitle + " with user select text: " + currentChoice.getUserSelectText()
                 self.scenarioDict[self.checkKey(thisTitle)].addChoice(currentChoice)
 
+
+    def getPlayer(self):
+        self.sFile.seek(0)
+        inPlayer = ""
+
+        for line in self.sFile:
+            if self.lineType(line) == self.IS_PLAYER_START and inPlayer == "":
+                inPlayer = inPlayer + self.IS_PLAYER_START
+            elif inPlayer != "" and self.lineType(line) != self.IS_SCENARIO:
+                inPlayer = inPlayer + line
+            elif self.lineType(line) == self.IS_SCENARIO:
+                break
+
+        print inPlayer
+
+        jsonPlayer = json.loads(inPlayer)
+
+        thePlayer = character(jsonPlayer["name"], jsonPlayer["type"], jsonPlayer["race"], jsonPlayer["hp"], jsonPlayer["inventory"] )
+
+        return thePlayer
+
+
     def printDict(self):
         for k,v in self.scenarioDict.items():
             #print " >>>> " + k
@@ -127,6 +157,6 @@ class story_parser:
 
         #self.printDict()
 
-        self.sFile.close()
+        #self.sFile.close()
 
-        return self.scenarioDict[self.firstChoiceName]
+        return [self.scenarioDict[self.firstChoiceName], self.getPlayer()]

@@ -1,60 +1,72 @@
 
-class item:
+def itemFactory(itemJson):
+    if itemJson["itemType"] == "Weapon":
+        return weapon(itemJson["name"], itemJson["itemType"], itemJson["itemSubType"], itemJson["description"], itemJson["damage"], itemJson["adjustment"])
 
-    def __init__(self, name, itemType, description):
+    if itemJson["itemType"] == "Money":
+        return weapon(itemJson["name"], itemJson["itemType"], itemJson["itemSubType"], itemJson["description"], itemJson["value"])
+
+
+class item(object):
+
+    def __init__(self, name, itemType, itemSubType, description):
         self.name = name
         self.type = itemType
+        self.itemSubType = itemSubType
         self.description = description
 
     def show(self):
 
-        print "Name: " + self.name + "\n"
-        print "Type: " + self.type + "\n"
-        print "Description: " + self.description + "\n"
+        print "Name: " + self.name
+        print "Type: " + self.type
+        print "SubType: " + self.itemSubType
+        print "Description: " + self.description
 
 
 class armor(item):
 
-    def __init__(self, name, itemType, description, adjustment=0):
-        item.__init__(self, name, itemType, description)
+    def __init__(self, name, itemType, itemSubType, description, adjustment=0):
+        super(armor, self).__init__(name, itemType, itemSubType, description)
 
         self.adjustment = adjustment
         
 
     def show(self):
 
-        super().show()
-        print "Adjustment: " + self.adjustment + "\n"
+        super(armor,self).show()
+        print "Adjustment: " + self.adjustment
 
 
 class weapon(item):
 
-    def __init__(self, name, itemType, description, damage, adjustment=0):
-        item.__init__(self, name, itemType, description)
+    def __init__(self, name, itemType, itemSubType, description, damage, adjustment=0):
+        super(weapon,self).__init__(name, itemType, itemSubType, description)
 
         self.adjustment = adjustment
         self.damage = damage
 
     def show(self):
 
-        super().show()
-        print "Adjustment: " + self.adjustment + "\n"
-        print "Damage: " + self.damage + "\n"
+        super(weapon,self).show()
+        print "Adjustment: " + str(self.adjustment)
+        print "Max Damage: " + str(self.damage)
 
 
 class money(item):
 
-    def __init__(self, name, itemType, description, value):
-        item.__init__(self, name, itemType, description)
+    def __init__(self, name, itemType, itemSubType, description, value):
+        super(money,self).__init__(name, itemType, itemSubType, description)
 
         self.value = value
 
-class gem(items):
+class gem(item):
 
-    def __init__(self, name, itemType, description, value):
-        item.__init__(self, name, itemType, description)
+    def __init__(self, name, itemType, itemSubType, description, value):
+        super(gem,self).__init__(name, itemType, itemSubType, description)
 
         self.value = value
+
+
 
 class inventory:
 
@@ -65,14 +77,13 @@ class inventory:
         else:
             self.items = items
 
-        self.weapons = {}
-        self.money = None
-        self.gems = None
-
-        self.items[0] = { name: "Leather Armor", acAdjust: 2}
-
+    def addItem(self, newItem):
+        self.items.append(newItem)
 
     def show(self):
+        print "Inventory Items"
         for item in self.items:
-            print "Items\n"
+            print ""
             item.show()
+
+        print ""
