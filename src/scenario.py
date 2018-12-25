@@ -9,7 +9,11 @@ class scenario:
         self.desc = None
         self.choices = []
         self.characters = characters
-        self.inventory = inventory
+
+        if inventory == None:
+            self.inventory = inventory()
+        else:
+            self.inventory = inventory
 
     def addChoice(self, the_choice):
         self.choices.append(the_choice)
