@@ -1,11 +1,12 @@
 from scenario import scenario
 from story_parser import story_parser
-import sys
 from character import character
+import sys
+
 
 if sys.argc < 2:
-	print "Only one argument is allowed: the story file!"
-  exit()
+    print "Only one argument is allowed: the story file!"
+    exit()
 
 storyParser = story_parser()
 
