@@ -1,3 +1,29 @@
+{
+    "name":   "Borgon",
+    "type":   "Fighter",
+    "race":   "Human",
+    "hp":     "7",
+    "inventory":  [ 
+                    {
+                        "name": "Your Sword",
+                        "itemType": "Weapon",
+                        "itemSubType": "Long Sword",
+                        "description": "An awesome sharp thing.",
+                        "damage": "8",
+                        "adjustment": "0"
+                    },
+                    
+                    {
+                        "name": "Some Gold",
+                        "itemType": "Money",
+                        "itemSubType": "Gold",
+                        "description": "You can buy stuff with it.",
+                        "value": "5"
+                    }
+    ]
+}
+
+
 # The lair of the Goblin Hoard
 
 ##

@@ -54,7 +54,8 @@ class scenario:
         print "-------------------"
 
 
-    def prompt(self):
+    def prompt(self, player):
+        print(chr(27) + "[2J")
         pyout(self.title)
         pyout(self.desc)
         pyout("\n")
@@ -64,7 +65,9 @@ class scenario:
             pyout(str(cc)+" : "+aChoice.getUserSelectText())
             cc = cc + 1
 
-        pyout(str(cc)+" : Inventory")
+        pyout(str(cc)+" : Look Around")
+        cc = cc + 1
+        pyout(str(cc)+" : Me")
         cc = cc + 1
         pyout(str(cc)+" : Quit")
 
@@ -73,15 +76,22 @@ class scenario:
         while ucc <= 0 or (ucc > cc):
             ucc = self.collectUserInput()
 
-        if ucc == cc - 1:
+        if ucc == cc - 2:
             if self.inventory == None:
+                print(chr(27) + "[2J")
                 print "Nothing else here."
-                sleep(2)
-                self.prompt()
+                sleep(3)
+                self.prompt(player)
             else:
                 self.inventory.show()
+                self.prompt(player)
+        elif ucc == cc - 1:
+            player.show()
+            sleep(7)
+            self.prompt(player)
         elif ucc == cc:
+            print(chr(27) + "[2J")
             pyout("\nBye!")
         else:
-            self.choices[ucc-1].prompt()
+            self.choices[ucc-1].prompt(player)
 

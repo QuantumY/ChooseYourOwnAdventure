@@ -1,4 +1,29 @@
-# The lair of the Goblin Hoard
+{
+    "name":   "Borgon",
+    "type":   "Fighter",
+    "race":   "Human",
+    "hp":     "7",
+    "inventory":  [ 
+                    {
+                        "name": "Your Sword",
+                        "itemType": "Weapon",
+                        "itemSubType": "Long Sword",
+                        "description": "An awesome sharp thing.",
+                        "damage": "8",
+                        "adjustment": "0"
+                    },
+                    
+                    {
+                        "name": "Some Gold",
+                        "itemType": "Money",
+                        "itemSubType": "Gold",
+                        "description": "You can buy stuff with it.",
+                        "value": "5"
+                    }
+    ]
+}
+
+# The Lair of the Goblin Hoard
 
 ##
 You enter the Goblin Dungeon. You notice you’re in a strange, dome shaped room. You see a message scratched the on the wall.
@@ -10,6 +35,7 @@ There are two tunnels. You hear strange noises echoing from the right tunnel. Yo
 #### The Mess Hall Cave
 ### Take the right tunnel.
 #### The Fountain Room
+
 #The Mess Hall Cave 
 
 ##
@@ -26,11 +52,11 @@ You step into the mess hall. There are 4 rows of very long tables. Each table is
 ##
 Inside this room is long, square lake. It seems to be man made. You see chests at each corner of the room. Each one has the same keyhole. There are three tunnels leading out of the room. The first tunnel is the one you just came from. There is a big door blocking the second tunnel. From it you here voices you don’t understand. From the third tunnel you see and hear nothing but and empty void. The door from the second tunnel opens, and a small runt of a goblin waddles out. He begins to head out through the first tunnel. But he turns around and notices you! 
 
-#### Goblin fight B
+#### Goblin fight B, Prize
 
 
 
-#Goblin fight A, prize
+#Goblin fight A
 
 ##
 You defeated the Round Goblin! You search it and find 3 gold pieces and 1 electrum piece. It also has a rusty dagger. You gain 80 EXP. 
@@ -42,7 +68,7 @@ You defeated the Round Goblin! You search it and find 3 gold pieces and 1 electr
 #### Bed Hall
 
 
-#Goblin fight B
+#Goblin fight B, Prize
 
 ##
 You encountered the Runt-of-a-Goblin!
@@ -61,7 +87,7 @@ You have initiative. You go first. Run the battle normally.
 #### Drop everything you collected and restart at: The Lair of the Goblin Hoard.
 
 
-#Bed Hall 
+#Bed Hall
 
 ##
 You’re in a long corridor with fancy doors on either side.
@@ -83,7 +109,7 @@ You walk in only to fight find a big, gorgeous bedroom with paintings, two beds,
 ### Leave to be on the safe side.
 #### Bed Hall
 On last sentence of description erase on
-#Goblin fight B, prize
+#Goblin fight B, Prize
 
 ##
 You defeated the Runt-of-a-Goblin! You search it and find a key and 20 gold pieces. You don’t take the sword. You also got 75 EXP.
