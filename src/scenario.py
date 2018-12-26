@@ -1,19 +1,20 @@
 from pyio import *
 from choice import choice
 from time import sleep
+from inventory import *
 
 class scenario:
 
-    def __init__(self, characters=None, inventory=None):
+    def __init__(self, characters=None, sInventory=None):
         self.title = None
         self.desc = None
         self.choices = []
         self.characters = characters
 
-        if inventory == None:
+        if sInventory == None:
             self.inventory = inventory()
         else:
-            self.inventory = inventory
+            self.inventory = sInventory
 
     def addChoice(self, the_choice):
         self.choices.append(the_choice)
