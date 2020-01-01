@@ -39,7 +39,7 @@ There are two tunnels. You hear strange noises echoing from the right tunnel. Yo
 #The Mess Hall Cave 
 
 ##
-You step into the mess hall. There are 4 rows of very long tables. Each table is lined with juicy meats and hardly and veggies. On the third table, a short and stout goblin leans against his stone plate, drooling a bit. He is no doubt sleeping. Next to his plate is a fallen over goblet, with red wine dripping out onto the floor. There is another tunnel on the far end of the room. 
+You step into the mess hall. There are 4 rows of very long tables. Each table is lined with juicy meats and hardly any veggies. On the third table, a short and stout goblin leans against his stone plate, drooling a bit. He is no doubt sleeping. Next to his plate is a fallen over goblet, with red wine dripping out onto the floor. There is another tunnel on the far end of the room. 
 ### Attack the goblin. 
 ####Goblin fight A
 ###Carefully move to the far tunnel.

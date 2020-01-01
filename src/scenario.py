@@ -9,7 +9,7 @@ class scenario:
         self.title = None
         self.desc = None
         self.choices = []
-        self.characters = characters
+        self.characters = []
         self.inventory = sInventory
 
     def addChoice(self, the_choice):
